@@ -6,7 +6,7 @@ import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
 export default [
   {
     name: "app/files-to-lint",
-    files: ["**/*.{js,mjs,jsx,vue}"]
+    files: ["**/*.{js,mjs,jsx,vue}"],
   },
 
   {
@@ -38,7 +38,9 @@ export default [
       "arrow-parens": ["error", "always"], // Enforces parentheses around arrow function arguments
       indent: ["error", 2], // Enforces 2-space indentation
       "comma-dangle": ["warn", "never"], // Disallows trailing commas
-      "object-curly-spacing": ["warn", "always"] // Enforces spaces inside object brackets
+      "object-curly-spacing": ["warn", "always"], // Enforces spaces inside object brackets
+      "vue/no-undef-components": ["error", { "ignore": ["RouterLink", "RouterView"] }],
+      "vue/no-unused-components": "warn", // Warn instead of error
     }
   }
 ];
