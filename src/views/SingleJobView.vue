@@ -66,6 +66,24 @@ const deleteJob = async () => {
   }
 };
 
+const generatePrompt = async () => {
+  const response = await axios.post(
+    "https://api.openai.com/v1/chat/completions",
+    {
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: `generate job description for ${form.title}` }]
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_OPEN_AI_KEY}`,
+        "Content-Type": "application/json"
+      }
+    }
+  );
+
+  form.description = response.data.choices[0].message.content;
+};
+
 onMounted(async () => {
   try {
     if (!jobId) {
@@ -141,6 +159,13 @@ onMounted(async () => {
               rows="4"
               placeholder="Add any job duties, expectations, requirements, etc"
             ></textarea>
+            <button
+              type="button"
+              @click="generatePrompt"
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+            >
+              Generate description prompt
+            </button>
           </div>
 
           <div class="mb-4">
