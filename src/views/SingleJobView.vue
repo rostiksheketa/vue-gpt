@@ -54,7 +54,6 @@ const handleSubmit = async () => {
 const deleteJob = async () => {
   try {
     const confirm = window.confirm("Are you sure you want to delete this job?");
-    console.log(confirm);
 
     if (confirm) {
       await axios.delete(`/api/jobs/${jobId}`);
