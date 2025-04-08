@@ -1,0 +1,35 @@
+name: Vue App CI
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🛠 Build project
+        run: npm run build
+
+      - name: 🔍 Preview build (optional)
+        if: false  # set to `true` to run preview in CI
+        run: npm run preview
+
+      - name: 🧪 Start JSON server (optional)
+        if: false  # set to `true` to run json-server in CI
+        run: |
+          npm install -g json-server
+          npm run server
